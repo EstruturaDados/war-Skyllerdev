@@ -14,6 +14,25 @@
 //
 // ============================================================================
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define TAM_STRINGS 100
+
+typedef struct{
+    char nome[TAM_STRINGS];
+    char cor[TAM_STRINGS];
+    int tropas;
+} Territorio;
+
+void limparLinha() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+
+
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
 
 // --- Constantes Globais ---
@@ -32,6 +51,33 @@
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
+
+    Territorio *mapa = calloc(5, sizeof(Territorio)); // 5 Territórios
+
+    for (int i = 0; i < 5; i++) {
+        printf("----------\n");
+        printf("Cadastro de território %d\n", i + 1); // Vai pegar o territorio atual
+        printf("Nome: ");
+        fgets(mapa[i].nome, TAM_STRINGS, stdin);
+        printf("Cor: ");
+        fgets(mapa[i].cor, TAM_STRINGS, stdin);
+        printf("Tropas: ");
+        scanf("%d", &mapa[i].tropas);
+        limparLinha();
+}
+
+    //Estado do Mapa
+    for (int i = 0; i < 5; i++) {
+        printf("-----------");
+        printf("Território %s", mapa[i].nome);
+        printf("Cor: %s", mapa[i].cor);
+        printf("Tropas: %d\n", mapa[i].tropas);
+        printf("\n");
+    }
+
+
+
+
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
